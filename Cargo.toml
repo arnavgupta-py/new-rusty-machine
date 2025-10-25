@@ -1,12 +1,27 @@
+# This section defines the metadata for the Rust package (crate).
 [package]
-name = "new-rusty-machine"
+name = "rusty_machine"
 version = "0.1.0"
 edition = "2021"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+# This section configures the library build.
 [lib]
-name = "new_rusty_machine"
+# The name of the resulting library file.
+name = "rusty_machine"
+# Specifies the crate type as a 'cdylib' (C-style Dynamic Library).
+# This is required for creating a Python extension module that can be
+# imported by the Python interpreter.
 crate-type = ["cdylib"]
 
+# This section lists all the Rust dependencies (crates) required
+# by this project.
 [dependencies]
-pyo3 = "0.25.0"
+# The `pyo3` crate provides the Rust bindings for the Python interpreter.
+# The "extension-module" feature is essential for building the shared
+# library in a way that Python can import.
+pyo3 = { version = "0.25.1", features = ["extension-module"] }
+
+# The `cust` crate provides a high-level, safe wrapper around the
+# NVIDIA CUDA driver API, allowing for easier management of GPU
+# resources, memory, and kernel launches from Rust.
+cust = "0.3.2"

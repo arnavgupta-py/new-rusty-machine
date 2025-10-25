@@ -1,15 +1,41 @@
+# This section specifies the build system for the Python package.
 [build-system]
+# We declare that `maturin` (a tool for building Rust-based Python packages)
+# is required to build this project.
 requires = ["maturin>=1.9,<2.0"]
 build-backend = "maturin"
 
+# This section contains all the metadata for the Python package
+# that will be published to PyPI or installed locally.
 [project]
-name = "new-rusty-machine"
+# The name of the Python package as it will be imported (`import rusty_machine`).
+name = "rusty_machine"
 requires-python = ">=3.8"
+description = "A high-performance machine learning library in Rust with Python bindings, accelerated by CUDA."
+readme = "README.md"
+license = { text = "MIT" }
+authors = [
+  { name = "Arnav Gupta", email = "arnav.gupta.9404@gmail.com" },
+]
 classifiers = [
     "Programming Language :: Rust",
     "Programming Language :: Python :: Implementation :: CPython",
     "Programming Language :: Python :: Implementation :: PyPy",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "License :: OSI Approved :: MIT License",
 ]
+# The version is dynamic, typically sourced from git or a file.
 dynamic = ["version"]
+
+# Core dependencies needed to USE the library.
+# These are the Python packages required by the `rustymachine_api` Python code.
+dependencies = [
+    "numpy>=1.21",
+    # This specifies the pre-compiled CuPy wheel that matches CUDA 12.x.
+    "cupy-cuda12x>=12.0",
+]
+
+# This section configures the `maturin` build tool.
 [tool.maturin]
+# Specifies the `pyo3` feature to enable, aligning with Cargo.toml.
 features = ["pyo3/extension-module"]
