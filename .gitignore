@@ -1,5 +1,12 @@
+assets/external/
+*.db
+*.py[cod]
+.web
+.states
 target/
 venv/
 __pycache__/
 documents/
 .git
+.web/
+assets/
